@@ -1,0 +1,32 @@
+{% extends "assistant/base.html" %} 
+{% block content %}
+<div class="centerstage">
+    <p>Welcome to {{ healthstatus.patientid }} health page. Thanks for logging in.</p>
+    <p>{{ healthstatus.patientid }} health status is:{{ healthstatus.status }}</p>
+
+</div>
+<hr>
+{% if perms.assistant.create_review %}
+<a class="btn btn-primary btn-comment" href="{% url 'assistant:add_comment_to_post' pk=healthstatus.pk %}">Add Recommendation</a>
+{% endif %}
+<div class="container">
+    {% for comment in healthstatus.recommendation.all %}
+    <br> 
+        {% if user.is_authenticated %} 
+            {{ comment.created_date }} 
+            {% if not comment.approved_comment %}
+            <a class="btn btn-default" href="{% url 'assistant:comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+            <a class="btn btn-default" href="{% url 'assistant:comment_approve' pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
+            {% endif %}
+
+        <p>{{ comment.text|safe|linebreaks }}</p>
+        <p>Posted by:
+            <strong>{{ comment.doctor }}</strong>
+        </p>
+        
+        {% endif %} 
+    {% empty %}
+    <p>No Recommendation</p>
+    {% endfor %}
+</div>
+{% endblock content %}

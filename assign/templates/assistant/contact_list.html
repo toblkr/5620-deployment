@@ -1,0 +1,16 @@
+{% extends "assistant/base.html" %}
+{% block content %}
+<div class="centerstage">
+        {% for post in contact_list %}
+            <div class="post">
+    
+                <h1>Emergency Title: {{ post.title }}</h1>
+                <h3>Contact: {{ post.number}}</h3>
+                <div class="date">
+                    <p>Published on: {{ post.published_date|date:"D M Y"}}</p>
+                </div>
+                
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}

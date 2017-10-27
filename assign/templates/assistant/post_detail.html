@@ -1,0 +1,22 @@
+{% extends 'assistant/base.html' %}
+
+{% block content %}
+
+
+        <h1 class='posttitle loader'>{{ post.title }}</h1>
+
+        {% if post.published_date %}
+            <div class="date postdate">
+                {{ post.published_date }}
+            </div>
+
+        {% else %}
+            <a class="btn btn-default" href="{% url 'assistant:post_publish' pk=post.pk %}">Publish</a>
+        {% endif %}
+
+      <p class='postcontent' >{{ post.text|safe|linebreaksbr }}</p>
+  <hr>
+  <div class="container">
+</div>
+
+{% endblock %}

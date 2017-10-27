@@ -1,0 +1,15 @@
+{% extends "assistant/base.html" %}
+{% block content %}
+<div class="centerstage">
+    
+    
+        {% for post in healthstatus_list %}
+            <div class="healthstatus">
+    
+                <h1><a href="{% url 'assistant:healthstatus' pk=post.pk %}">{{ post.patientid }}</a></h1>
+                
+                <a href="{% url 'assistant:healthstatus' pk=post.pk %}">detail</a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}
